@@ -1,21 +1,20 @@
-// Regular Objects
+// Using Functions to Return an Object
 
-var student = {
-  firstName: 'Philip',
-  middleInitial: 'J',
-  lastName: 'Fry',
-  fullName: function () {
-    return this.firstName + ' ' + this.middleInitial + ' ' + this.lastName;
-  }
+var giveMeAStudent = function(first, middle, last) {
+  return {
+    firstName: first,
+    middleInitial: middle,
+    lastName: last,
+    fullName: function () {
+      return this.firstName + ' ' + this.middleInitial + ' ' + this.lastName;
+    }
+  };
 };
 
-console.log(student.fullName()); // "Philip J Fry"
-student.firstName = 'Joe';
+var student = giveMeAStudent('Phillip', 'J', 'Fry');
 
-var student2 = {
-  firstName: 'Eric',
-  middleInitial: '.',
-  lastName: 'Cartman'
-};
+console.log(student.fullName());
 
-console.log(student2.fullName()); // Undefined is not a function
+var student2 = giveMeAStudent('Eric', 'T', 'Cartman');
+
+console.log(student2.fullName());
