@@ -16,7 +16,13 @@ function Student(first, middle, last, seat) {
   // I don't want to write the same constructor twice
   Person.call(this, first, middle, last);
 
-  this.seatNumber = seat;
+  this.moveSeat = function () {
+    seat = seat * 5;
+  };
+
+  this.tellMeYourSeat = function () {
+    return 'A' + seat;
+  };
 }
 
 // Student should inherit from the Person prototype
@@ -28,16 +34,20 @@ Student.prototype.fullName = function () {
   return 'STUDENT: ' + tmp;
 };
 
-var student = new Student('Phillip', 'J', 'Fry');
-var student2 = new Student('Eric', 'T', 'Cartman');
+var student1 = new Student('Phillip', 'J', 'Fry', 1);
+var student2 = new Student('Eric', 'T', 'Cartman', 2);
 
 // Sets fullName on a single student
 student2.fullName = function() {
   return 'Hey';
 };
 
-console.log(student.fullName());
+console.log(student1.fullName());
 console.log(student2.fullName());
+console.log(student1.seatNumber);
+console.log(student1.tellMeYourSeat());
+console.log(student1.moveSeat());
+console.log(student1.tellMeYourSeat());
 
 console.log(student2 instanceof Student);
 console.log(student2 instanceof Person);
