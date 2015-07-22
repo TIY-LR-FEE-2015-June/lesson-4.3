@@ -1,14 +1,16 @@
-// Basic Inheritance
+// Overriding Prototype Functions
 
 function Person(first, middle, last) {
   this.firstName = first;
   this.middleInitial = middle;
   this.lastName = last;
-
-  this.fullName = function () {
-    return this.firstName + ' ' + this.middleInitial + ' ' + this.lastName;
-  };
 }
+
+// The fullName function should be available
+// to every Person object
+Person.prototype.fullName = function () {
+  return this.firstName + ' ' + this.middleInitial + ' ' + this.lastName;
+};
 
 function Student(first, middle, last, seat) {
   // I don't want to write the same constructor twice
@@ -17,15 +19,24 @@ function Student(first, middle, last, seat) {
   this.seatNumber = seat;
 }
 
-// Student should inherit from Person
+// Student should inherit from the Person prototype
 Student.prototype = Object.create(Person.prototype);
 
+Student.prototype.fullName = function () {
+  var tmp = Person.prototype.fullName.call(this);
+
+  return 'STUDENT: ' + tmp;
+};
+
 var student = new Student('Phillip', 'J', 'Fry');
-
-console.log(student.fullName());
-
 var student2 = new Student('Eric', 'T', 'Cartman');
 
+// Sets fullName on a single student
+student2.fullName = function() {
+  return 'Hey';
+};
+
+console.log(student.fullName());
 console.log(student2.fullName());
 
 console.log(student2 instanceof Student);
