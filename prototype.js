@@ -1,20 +1,23 @@
-// Using Functions to Return an Object
+// Basic Constructor
 
-var giveMeAStudent = function(first, middle, last) {
-  return {
-    firstName: first,
-    middleInitial: middle,
-    lastName: last,
-    fullName: function () {
-      return this.firstName + ' ' + this.middleInitial + ' ' + this.lastName;
-    }
+function Student(first, middle, last) {
+  this.firstName = first;
+  this.middleInitial = middle;
+  this.lastName = last;
+
+  this.fullName = function () {
+    return this.firstName + ' ' + this.middleInitial + ' ' + this.lastName;
   };
-};
+}
 
-var student = giveMeAStudent('Phillip', 'J', 'Fry');
+var student = new Student('Phillip', 'J', 'Fry');
 
 console.log(student.fullName());
 
-var student2 = giveMeAStudent('Eric', 'T', 'Cartman');
+var student2 = new Student('Eric', 'T', 'Cartman');
 
 console.log(student2.fullName());
+
+console.assert(student2 instanceof Student, 'student2 should be a Student');
+console.assert(student2 instanceof Object, 'student2 should be an Object');
+console.assert(!(student2 instanceof Array), 'student2 should not be an Array');
